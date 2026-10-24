@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Marathon Quest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<link rel="stylesheet" href="styles.css">
+<title>Marathon Quest</title>
+</head><body>
+<header class="hero">
+  <div class="row"><div><div class="lvl" id="lvlName">Level 1 · Rookie Returner</div><div class="sub" id="xpText">0 XP</div></div>
+  <div class="flame" id="flame">🔥<span id="streak">0</span></div></div>
+  <div class="bar"><div class="fill" id="xpFill"></div></div>
+  <div class="sub" id="nextText"></div>
+</header>
+<nav class="tabs"><button data-tab="run" class="on">🏃 Run</button><button data-tab="quest">🗺️ Quest</button><button data-tab="hist">📜 History</button></nav>
+
+<section id="tab-run" class="tab on">
+  <div class="card">
+    <div class="ivrow">Coach:
+      <select id="ivSel"><option value="4:1">4:1 run-walk</option><option value="5:1">5:1</option><option value="6:1">6:1</option><option value="cont">Continuous</option></select>
+      <label class="chk"><input type="checkbox" id="voiceChk" checked> Voice</label><label class="chk"><input type="checkbox" id="boostChk" checked> ⚡ Boosts</label></div>
+    <div id="phase" class="phase">READY</div>
+    <div id="phaseCd" class="sub center"></div>
+    <div id="turbo" class="turbo" hidden><div class="tb-title">⚡ TURBO BOOST ⚡</div>
+      <div class="tb-row"><div><b id="tbTarget">--:--</b><span>target /mi</span></div><div><b id="tbSeg">--:--</b><span>segment /mi</span></div><div><b id="tbLeft">0.10</b><span>mi left</span></div></div>
+      <div class="tb-bar"><div id="tbFill"></div></div><div id="tbMsg" class="sub center"></div></div>
+    <div id="timer" class="timer">0:00:00</div>
+    <div class="stats">
+      <div><b id="dist">0.00</b><span>miles</span></div>
+      <div><b id="curPace">--:--</b><span>current /mi</span></div>
+      <div><b id="avgPace">--:--</b><span>avg /mi</span></div>
+    </div>
+    <div class="paceRow"><span>⚡ Boost target <b id="boostTarget">--:--</b>/mi</span><span>Boosts <b id="boostCount">0/0</b> · <b id="boostPts">0</b> pts</span></div>
+    <div id="gps" class="sub center">📍 GPS idle</div>
+    <div id="map" class="map"></div>
+    <div class="btns">
+      <button id="startBtn" class="big go">START</button>
+      <button id="pauseBtn" class="mid" hidden>PAUSE</button>
+      <button id="lapBtn" class="mid" hidden>LAP</button>
+      <button id="stopBtn" class="mid stop" hidden>STOP</button>
+    </div>
+    <ol id="laps" class="laps"></ol>
+    <div class="sub">Keep the screen on and the app in front during the run. iPhone pauses GPS if the screen locks.</div>
+  </div>
+  <div id="summary" class="card" hidden></div>
+</section>
+
+<section id="tab-quest" class="tab">
+  <div class="card"><h3>🗺️ Level ladder</h3><div id="ladder"></div></div>
+  <div class="card"><h3>🏆 Badges <span class="sub" id="badgeCount"></span></h3><div id="badges" class="grid"></div></div>
+  <div class="card"><h3>📅 Week 1 quests</h3><div id="quests"></div></div>
+  <div class="card"><h3>⚔️ Boss path</h3><div id="bosses" class="bosses"></div></div>
+  <div class="card"><h3>💡 Tips</h3><div id="tips" class="tips"></div></div>
+  <div class="card sub">XP rules: run-walk session 10 XP · continuous run 10 + 1/mile · long run (30+ min) +15 bonus · ⚡ Turbo Boost achieved +5 booster points.</div>
+</section>
+
+<section id="tab-hist" class="tab">
+  <div class="card"><div class="btns"><button id="exportBtn" class="mid">Export JSON</button><button id="importBtn" class="mid">Import JSON</button><input type="file" id="importFile" accept="application/json" hidden></div></div>
+  <div id="histList"></div>
+</section>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="app.js"></script>
+</body></html>
